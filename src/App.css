@@ -1,0 +1,225 @@
+/* --- Dark Theme Variables --- */
+:root {
+  --dark-bg: #18191a;
+  --dark-container-bg: #242526;
+  --dark-border: #3a3b3c;
+  --dark-text-primary: #e4e6eb;
+  --dark-text-secondary: #b0b3b8;
+  --dark-input-bg: #3a3b3c;
+  --button-red: #d93025;
+  --button-red-hover: #a52714;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--dark-text-primary);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: 2rem;
+}
+
+#root {
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem;
+  padding: 0;
+}
+
+.container {
+  background-color: var(--dark-container-bg);
+  border-radius: 8px;
+  border: 1px solid var(--dark-border);
+  box-shadow: none;
+  padding: 24px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  color: var(--dark-text-primary);
+  margin-bottom: 20px;
+}
+
+p {
+  color: var(--dark-text-secondary);
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+/* --- Toggle Switch --- */
+.toggle-container {
+  background-color: var(--dark-input-bg);
+  border-radius: 8px;
+  display: flex;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.toggle-button {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  background-color: transparent;
+  color: var(--dark-text-secondary);
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.toggle-button.active {
+  background-color: var(--dark-border);
+  color: var(--dark-text-primary);
+}
+
+
+.form-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-input, .form-textarea {
+  display: block;
+  width: calc(100% - 24px);
+  margin: 0 auto 16px auto;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  background-color: var(--dark-input-bg);
+  color: var(--dark-text-primary);
+  border: 1px solid var(--dark-border);
+  font-family: inherit;
+}
+
+.form-textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.form-input::placeholder, .form-textarea::placeholder {
+  color: var(--dark-text-secondary);
+}
+
+/* --- Buttons --- */
+.generate-button, .copy-button {
+  background-color: var(--button-red);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.generate-button:hover, .copy-button:hover {
+  background-color: var(--button-red-hover);
+}
+
+.copy-button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+/* --- Report & Error --- */
+.report-container {
+  background-color: var(--dark-bg);
+  border: 1px solid var(--dark-border);
+  color: var(--dark-text-primary);
+  border-radius: 6px;
+  padding: 16px;
+  margin-top: 20px;
+  text-align: left;
+  white-space: pre-wrap;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.error-message {
+  color: #ff8a80; /* Lighter red for dark background */
+  margin-top: 16px;
+  font-weight: bold;
+}
+
+/* --- Fieldset & Legend --- */
+fieldset {
+  border: 1px solid var(--dark-border);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 20px;
+  flex: 1;
+  min-width: 300px;
+}
+
+legend {
+  padding: 0 8px;
+  font-weight: bold;
+  color: var(--dark-text-secondary);
+  text-align: left;
+}
+
+/* --- Datepicker Dark Theme --- */
+.react-datepicker-wrapper {
+  width: 100%;
+  display: block;
+  margin: 0 auto 16px auto;
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+}
+
+.react-datepicker__input-container .form-input {
+  width: calc(100% - 24px);
+  margin-bottom: 0;
+}
+
+.react-datepicker {
+  background-color: var(--dark-container-bg);
+  border: 1px solid var(--dark-border);
+  color: var(--dark-text-primary);
+}
+
+.react-datepicker__header {
+  background-color: var(--dark-bg);
+  border-bottom: 1px solid var(--dark-border);
+}
+
+.react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
+  color: var(--dark-text-primary);
+}
+
+.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
+  color: var(--dark-text-primary);
+}
+
+.react-datepicker__day:hover {
+  background-color: var(--dark-input-bg);
+}
+
+.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range {
+  background-color: var(--button-red);
+}
+
+.react-datepicker__day--selected:hover, .react-datepicker__day--in-selecting-range:hover, .react-datepicker__day--in-range:hover {
+  background-color: var(--button-red-hover);
+}
+
+.react-datepicker__day--disabled {
+  color: #4a4a4a;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: var(--dark-text-primary);
+}

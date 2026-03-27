@@ -94,9 +94,13 @@ function App() {
           {loadingMetrics && !metricsData && <p>Carregando métricas...</p>}
           {errorMetrics && <p className="error-message">Erro: {errorMetrics}</p>}
           
-          {metricsData && (
+          {metricsData && !loadingMetrics && (
             <div style={{ opacity: loadingMetrics ? 0.6 : 1, transition: 'opacity 0.2s' }}>
-              <MetaAdsReport data={metricsData} />
+              {metricsData.metrics ? (
+                <MetaAdsReport data={metricsData} />
+              ) : (
+                <p>Erro: Dados de métricas incompletos no banco de dados.</p>
+              )}
             </div>
           )}
           

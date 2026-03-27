@@ -18,19 +18,25 @@ interface MetaAdsReportProps {
 }
 
 const MetaAdsReport: React.FC<MetaAdsReportProps> = ({ data }) => {
-  const { impressions, clicks, spend, messages = 0 } = data.metrics;
+  // Proteção: Garante que 'metrics' existe
+  const metrics = data?.metrics || { impressions: 0, clicks: 0, spend: 0, messages: 0 };
+  const { impressions = 0, clicks = 0, spend = 0, messages = 0 } = metrics;
 
-  // Cálculos de Performance
+  // Cálculos de Performance (com proteção contra divisão por zero)
   const ctr = impressions > 0 ? (clicks / impressions) * 100 : 0;
   const cpc = clicks > 0 ? spend / clicks : 0;
   const costPerMessage = messages > 0 ? spend / messages : 0;
+
+  const lastUpdatedDate = data?.lastUpdated 
+    ? new Date(data.lastUpdated).toLocaleString('pt-BR') 
+    : 'Data não disponível';
 
   return (
     <div className="meta-report">
       <div className="report-header">
         <h2>Painel de Métricas Meta Ads</h2>
         <p className="last-updated">
-          Atualizado em: {new Date(data.lastUpdated).toLocaleString('pt-BR')}
+          Atualizado em: {lastUpdatedDate}
         </p>
       </div>
 

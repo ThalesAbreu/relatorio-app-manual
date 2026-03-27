@@ -331,3 +331,40 @@ legend {
   display: block;
   margin-bottom: 4px;
 }
+
+/* --- Refresh Button Styles --- */
+.metrics-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.refresh-button {
+  background-color: var(--dark-input-bg);
+  color: var(--dark-text-secondary);
+  border: 1px solid var(--dark-border);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.refresh-button:hover {
+  background-color: var(--dark-border);
+  color: var(--dark-text-primary);
+  border-color: var(--dark-text-secondary);
+}
+
+.refresh-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.refresh-button:active {
+  transform: scale(0.96);
+}

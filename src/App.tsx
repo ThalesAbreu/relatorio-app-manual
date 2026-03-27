@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import MessageReport from './MessageReport';
 import ProfileReport from './ProfileReport';
 import MetaAdsReport from './MetaAdsReport';
@@ -22,31 +22,34 @@ interface MetricsData {
 function App() {
   const [reportVariant, setReportVariant] = useState<ReportVariant>('messages');
   const [metricsData, setMetricsData] = useState<MetricsData | null>(null);
-  const [loadingMetrics, setLoadingMetrics] = useState<boolean>(true);
+  const [loadingMetrics, setLoadingMetrics] = useState<boolean>(false);
   const [errorMetrics, setErrorMetrics] = useState<string | null>(null);
 
+  // Função para buscar as métricas (agora separada para ser reutilizada)
+  const fetchMetrics = useCallback(async () => {
+    setLoadingMetrics(true);
+    setErrorMetrics(null);
+    try {
+      // Adicionamos um timestamp para evitar cache do navegador no GET
+      const response = await fetch(`/api/metrics?t=${Date.now()}`);
+      if (!response.ok) {
+        throw new Error(`Erro HTTP! Status: ${response.status}`);
+      }
+      const data: MetricsData = await response.json();
+      setMetricsData(data);
+    } catch (error: any) {
+      setErrorMetrics(error.message || 'Erro ao buscar métricas.');
+    } finally {
+      setLoadingMetrics(false);
+    }
+  }, []);
+
+  // Busca automática ao trocar para a aba de métricas
   useEffect(() => {
     if (reportVariant === 'metrics') {
-      const fetchMetrics = async () => {
-        setLoadingMetrics(true);
-        setErrorMetrics(null);
-        try {
-          const response = await fetch('/api/metrics');
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const data: MetricsData = await response.json();
-          setMetricsData(data);
-        } catch (error: any) {
-          setErrorMetrics(error.message || 'Erro ao buscar métricas.');
-        } finally {
-          setLoadingMetrics(false);
-        }
-      };
-
       fetchMetrics();
     }
-  }, [reportVariant]);
+  }, [reportVariant, fetchMetrics]);
 
   return (
     <div className="container">
@@ -78,11 +81,25 @@ function App() {
       {reportVariant === 'profile' && <ProfileReport />}
       {reportVariant === 'metrics' && (
         <div className="report-content">
-          {loadingMetrics && <p>Carregando métricas...</p>}
+          <div className="metrics-controls">
+            <button 
+              className="refresh-button" 
+              onClick={fetchMetrics} 
+              disabled={loadingMetrics}
+            >
+              {loadingMetrics ? 'Atualizando...' : '🔄 Atualizar Dados'}
+            </button>
+          </div>
+
+          {loadingMetrics && !metricsData && <p>Carregando métricas...</p>}
           {errorMetrics && <p className="error-message">Erro: {errorMetrics}</p>}
-          {metricsData && !loadingMetrics && (
-            <MetaAdsReport data={metricsData} />
+          
+          {metricsData && (
+            <div style={{ opacity: loadingMetrics ? 0.6 : 1, transition: 'opacity 0.2s' }}>
+              <MetaAdsReport data={metricsData} />
+            </div>
           )}
+          
           {!metricsData && !loadingMetrics && !errorMetrics && <p>Nenhuma métrica disponível.</p>}
         </div>
       )}

@@ -10,6 +10,7 @@ interface MetricsData {
     spend: number;
     messages?: number;
     description?: string;
+    [key: string]: any; // Permite nomes de chaves extras como "Valor gasto"
   };
 }
 
@@ -18,9 +19,8 @@ interface MetaAdsReportProps {
 }
 
 const MetaAdsReport: React.FC<MetaAdsReportProps> = ({ data }) => {
-  // Proteção: Garante que 'metrics' existe e converte para número
-  // Suporta tanto chaves em Inglês quanto em Português (vinda do n8n)
-  const rawMetrics = data?.metrics || {} as any;
+  // Proteção: Garante que 'metrics' existe e permite acesso dinâmico (Record<string, any>)
+  const rawMetrics = (data?.metrics || {}) as Record<string, any>;
   
   const spend = Number(rawMetrics.spend || rawMetrics["Valor gasto"] || 0);
   const messages = Number(rawMetrics.messages || rawMetrics["Mensagens"] || 0);

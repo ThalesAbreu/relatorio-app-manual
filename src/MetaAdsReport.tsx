@@ -93,6 +93,12 @@ const MetaAdsReport: React.FC<MetaAdsReportProps> = ({ data }) => {
           <p>{data.metrics.description}</p>
         </div>
       )}
+
+      {/* Debug Visual (pode remover depois) */}
+      <details style={{ marginTop: '40px', fontSize: '0.7rem', opacity: 0.4 }}>
+        <summary>Ver dados brutos (Debug)</summary>
+        <pre>{JSON.stringify(data, null, 2)}</pre>
+      </details>
     </div>
   );
 };

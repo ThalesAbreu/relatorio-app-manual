@@ -69,6 +69,17 @@ Para fazer a automação rodar sozinha e publicar o projeto.
     *   Volte para o nó "HTTP Request" no seu fluxo.
     *   Altere a **URL** para a do seu site publicado na Vercel: `https://[NOME-DO-SEU-PROJETO].vercel.app/api/metrics` (substitua `[NOME-DO-SEU-PROJETO]` pelo nome real).
 3.  **Faça o deploy no Vercel:**
-    *   O deploy para o Vercel geralmente é automático quando você envia seu código para o repositório Git (GitHub, GitLab, etc.). Certifique-se de que suas alterações foram enviadas (`git push`).
+    *   O deploy para o Vercel é automático quando você envia seu código para o repositório Git (`git push`).
 
-Com estes passos, seu projeto estará 100% funcional e automatizado.
+---
+
+## 5. Entendendo o Novo Dashboard de Métricas
+
+Agora seu projeto conta com um painel visual automático que calcula:
+
+*   **CTR (Taxa de Clique):** Eficiência do seu anúncio (Cliques / Impressões).
+*   **CPC Médio:** Quanto você está pagando por cada clique em média.
+*   **Custo por Mensagem:** O valor real que cada nova conversa no WhatsApp/Messenger está custando.
+
+**Dica:** Se o campo "Mensagens" aparecer como 0, verifique se o seu anúncio no Meta Ads está configurado com o objetivo de "Mensagens" e se o n8n está capturando a métrica `actions`.
+

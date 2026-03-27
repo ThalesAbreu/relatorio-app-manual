@@ -16,24 +16,9 @@ export default async function handler(
   if (req.method === 'POST') {
     // MEDIDA DE SEGURANÇA: Verificação do token secreto.
     const authToken = process.env.N8N_AUTH_TOKEN || 'SEU_TOKEN_PADRAO_LOCAL';
-    const receivedToken = req.headers['x-auth-token'];
-
-    console.log('--- Debug de Autenticação ---');
-    console.log('Método:', req.method);
-    console.log('Token configurado no Vercel (está definido?):', !!process.env.N8N_AUTH_TOKEN);
-    console.log('Token recebido no header (está presente?):', !!receivedToken);
-    
-    if (receivedToken !== authToken) {
-      console.error('ERRO: Tokens não coincidem!');
-      return res.status(401).json({ 
-        message: 'Acesso não autorizado.',
-        debug: {
-          header_presente: !!receivedToken,
-          env_presente: !!process.env.N8N_AUTH_TOKEN
-        }
-      });
+    if (req.headers['x-auth-token'] !== authToken) {
+      return res.status(401).json({ message: 'Acesso não autorizado.' });
     }
-    console.log('Autenticação bem-sucedida!');
 
     try {
       const dataToStore = {

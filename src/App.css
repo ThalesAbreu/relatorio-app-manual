@@ -223,3 +223,111 @@ legend {
 .react-datepicker__navigation-icon::before {
   border-color: var(--dark-text-primary);
 }
+
+/* --- Meta Ads Report (Dark Theme) --- */
+.meta-report {
+  padding: 24px;
+  background-color: var(--dark-bg);
+  border-radius: 8px;
+  border: 1px solid var(--dark-border);
+  margin-top: 20px;
+  text-align: left;
+}
+
+.report-header {
+  margin-bottom: 24px;
+}
+
+.report-header h2 {
+  margin: 0;
+  color: var(--dark-text-primary);
+  font-size: 1.5rem;
+}
+
+.last-updated {
+  font-size: 0.85rem;
+  color: var(--dark-text-secondary);
+  margin-top: 4px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.metric-card {
+  background-color: var(--dark-container-bg);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--dark-border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform 0.2s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--dark-text-secondary);
+}
+
+.metric-card.highlight {
+  border-top: 3px solid #28a745;
+}
+
+.metric-card.highlight-alt {
+  border-top: 3px solid #007bff;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--dark-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.metric-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--dark-text-primary);
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark-text-secondary);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--dark-border);
+  padding-bottom: 8px;
+}
+
+.secondary .metric-card.mini {
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.secondary .metric-value {
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.description-box {
+  background-color: var(--dark-input-bg);
+  padding: 16px;
+  border-radius: 6px;
+  border-left: 4px solid var(--button-red);
+  font-size: 0.9rem;
+  margin-top: 24px;
+  color: var(--dark-text-secondary);
+}
+
+.description-box strong {
+  color: var(--dark-text-primary);
+  display: block;
+  margin-bottom: 4px;
+}

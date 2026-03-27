@@ -21,9 +21,11 @@ export default async function handler(
     }
 
     try {
+      console.log('Dados recebidos do n8n (Body):', JSON.stringify(req.body, null, 2));
+      
       const dataToStore = {
         lastUpdated: new Date().toISOString(),
-        metrics: req.body,
+        metrics: req.body || {},
       };
 
       // Salva os dados no banco de dados Redis na chave 'metrics'.

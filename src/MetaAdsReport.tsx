@@ -19,12 +19,13 @@ interface MetaAdsReportProps {
 
 const MetaAdsReport: React.FC<MetaAdsReportProps> = ({ data }) => {
   // Proteção: Garante que 'metrics' existe e converte para número
-  const rawMetrics = data?.metrics || {};
+  // Suporta tanto chaves em Inglês quanto em Português (vinda do n8n)
+  const rawMetrics = data?.metrics || {} as any;
   
-  const impressions = Number(rawMetrics.impressions || 0);
-  const clicks = Number(rawMetrics.clicks || 0);
-  const spend = Number(rawMetrics.spend || 0);
-  const messages = Number(rawMetrics.messages || 0);
+  const spend = Number(rawMetrics.spend || rawMetrics["Valor gasto"] || 0);
+  const messages = Number(rawMetrics.messages || rawMetrics["Mensagens"] || 0);
+  const impressions = Number(rawMetrics.impressions || rawMetrics["Impressões"] || 0);
+  const clicks = Number(rawMetrics.clicks || rawMetrics["Cliques"] || 0);
 
   // Cálculos de Performance (com proteção contra divisão por zero)
   const ctr = impressions > 0 ? (clicks / impressions) * 100 : 0;
